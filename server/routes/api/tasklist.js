@@ -6,20 +6,17 @@ const router = express.Router()
 //Get Tasks
 router.get('/', async (req, res) => {
     const tasklist = await loadTasksCollection();
-
     res.send(await tasklist.find({}).toArray())
 })
 
 //Add Task
 router.post('/', async(req, res) => {
     const tasklist = await loadTasksCollection();
-
     console.log(req.body.task)
     await tasklist.insertOne({
         task: req.body.task,
         dateCreated: new Date()
     })
-
     res.status(201).send()
 })
 
@@ -34,6 +31,5 @@ async function loadTasksCollection(){
     const client = await mongodb.MongoClient.connect("mongodb+srv://visal:1234@visalclouddb.k7ikj.gcp.mongodb.net/my_tasklist?retryWrites=true&w=majority", {useNewUrlParser: true})
     return client.db('my_tasklist').collection("mytasks")
 }
-
 
 module.exports = router
