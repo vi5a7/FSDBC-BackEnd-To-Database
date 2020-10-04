@@ -28,7 +28,7 @@ router.delete('/:id', async(req, res) => {
 })
 
 async function loadTasksCollection(){
-    const client = await mongodb.MongoClient.connect("mongodb+srv://visal:1234@visalclouddb.k7ikj.gcp.mongodb.net/my_tasklist?retryWrites=true&w=majority", {useNewUrlParser: true})
+    const client = await mongodb.MongoClient.connect("mongodb+srv://visal:1234@visalclouddb.k7ikj.gcp.mongodb.net/my_tasklist?retryWrites=true&w=majority", {useNewUrlParser: true, useUnifiedTopology: true})
     return client.db('my_tasklist').collection("mytasks")
 }
 
